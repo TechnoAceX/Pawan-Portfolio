@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience - AI/ML Developer 2050</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000a1a 100%);
+            min-height: 100vh;
+            color: #e0f7ff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, #00f0ff22 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, #9f00ff22 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, #ff006622 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #00f0ff, #9f00ff, #ff0066);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.3); }
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #b3e0ff;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #00f0ff, #9f00ff, #ff0066);
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.8);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 100%;
+            margin: 3rem 0;
+            opacity: 0;
+            animation: slideIn 0.8s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+        .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: 0;
+            margin-right: 55%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 55%;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 240, 255, 0.3);
+            border-color: rgba(0, 240, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #00f0ff, #9f00ff);
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.8);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -60px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -60px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.2); }
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #00f0ff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #9f00ff;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .duration {
+            font-size: 0.9rem;
+            color: #ff0066;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #b3e0ff;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .timeline-item:nth-child(odd) .tech-tags {
+            justify-content: flex-end;
+        }
+
+        .tech-tag {
+            background: linear-gradient(45deg, rgba(159, 0, 255, 0.3), rgba(0, 240, 255, 0.3));
+            border: 1px solid rgba(159, 0, 255, 0.5);
+            color: #fff;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .tech-tag:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(159, 0, 255, 0.8);
+            background: linear-gradient(45deg, rgba(159, 0, 255, 0.6), rgba(0, 240, 255, 0.6));
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 70px;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -60px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(odd) .tech-tags {
+                justify-content: flex-start;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, #00f0ff, #9f00ff);
+            border-radius: 50%;
+            animation: floatRandom 10s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes floatRandom {
+            0% { transform: translateY(100vh) translateX(0px) rotate(0deg); }
+            100% { transform: translateY(-100px) translateX(100px) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="section-title">💼 My Journey</h1>
+            <p class="section-subtitle">Shaping the future of AI/ML, one experience at a time</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 class="job-title">🧠 AI Research Intern</h3>
+                    <div class="company">QuantumLabs AI Research</div>
+                    <div class="duration">Jan 2025 – Mar 2025</div>
+                    <p class="description">
+                        Pioneered next-generation LLaMA model fine-tuning for medical report generation. 
+                        Developed neural architecture optimizations that improved accuracy by 23% and integrated 
+                        advanced AI models into production Flask applications.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">HuggingFace</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">Flask</span>
+                        <span class="tech-tag">CUDA</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 class="job-title">📊 Machine Learning Engineer</h3>
+                    <div class="company">DataVerse Analytics</div>
+                    <div class="duration">Sep 2024 – Dec 2024</div>
+                    <p class="description">
+                        Architected scalable ML pipelines processing 10M+ data points daily. Built predictive 
+                        models using ensemble methods and deep learning, achieving 94% accuracy in customer 
+                        behavior prediction systems for enterprise clients.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Scikit-Learn</span>
+                        <span class="tech-tag">Apache Spark</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 class="job-title">🚀 Full Stack AI Developer</h3>
+                    <div class="company">Amity University - Capstone Project</div>
+                    <div class="duration">May 2024 – Aug 2024</div>
+                    <p class="description">
+                        Led a team of 5 developers to create an intelligent academic management system. 
+                        Implemented computer vision for automated attendance, NLP for document processing, 
+                        and real-time analytics dashboard with 99.9% uptime.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">OpenCV</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">Socket.io</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 class="job-title">🌟 Freelance AI Consultant</h3>
+                    <div class="company">AstroVerse - Horoscope Intelligence</div>
+                    <div class="duration">Feb 2024 – Apr 2024</div>
+                    <p class="description">
+                        Developed an AI-powered personalized horoscope generation system using advanced 
+                        NLP and astronomical data analysis. Created responsive web application with 
+                        10,000+ active users and 4.8/5 user satisfaction rating.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">GPT API</span>
+                        <span class="tech-tag">Vue.js</span>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 class="job-title">🤖 Deep Learning Research Intern</h3>
+                    <div class="company">InnovateAI Labs</div>
+                    <div class="duration">Nov 2023 – Jan 2024</div>
+                    <p class="description">
+                        Researched cutting-edge transformer architectures for multimodal AI systems. 
+                        Published research on attention mechanisms optimization, contributing to 2 
+                        peer-reviewed papers and presenting at AI conferences.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Transformers</span>
+                        <span class="tech-tag">JAX</span>
+                        <span class="tech-tag">Weights & Biases</span>
+                        <span class="tech-tag">Jupyter</span>
+                        <span class="tech-tag">LaTeX</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3 class="job-title">🎯 Technical Community Lead</h3>
+                    <div class="company">Google Developer Student Club</div>
+                    <div class="duration">Aug 2023 – May 2024</div>
+                    <p class="description">
+                        Organized 15+ AI/ML workshops and hackathons for 500+ students. Built strong 
+                        developer community, mentored 50+ students in machine learning projects, and 
+                        established partnerships with leading tech companies.
+                    </p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Leadership</span>
+                        <span class="tech-tag">TensorFlow</span>
+                        <span class="tech-tag">Google Cloud</span>
+                        <span class="tech-tag">Firebase</span>
+                        <span class="tech-tag">Mentoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating elements for ambiance -->
+    <div class="floating-element" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="floating-element" style="left: 20%; animation-delay: 2s;"></div>
+    <div class="floating-element" style="left: 30%; animation-delay: 4s;"></div>
+    <div class="floating-element" style="left: 40%; animation-delay: 6s;"></div>
+    <div class="floating-element" style="left: 50%; animation-delay: 8s;"></div>
+    <div class="floating-element" style="left: 60%; animation-delay: 1s;"></div>
+    <div class="floating-element" style="left: 70%; animation-delay: 3s;"></div>
+    <div class="floating-element" style="left: 80%; animation-delay: 5s;"></div>
+    <div class="floating-element" style="left: 90%; animation-delay: 7s;"></div>
+
+    <script>
+        // Add smooth scrolling and entrance animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.timeline-content').forEach(content => {
+            content.addEventListener('mouseenter', () => {
+                content.style.transform = 'translateY(-10px) scale(1.02)';
+                content.style.boxShadow = '0 20px 40px rgba(0, 240, 255, 0.4)';
+            });
+
+            content.addEventListener('mouseleave', () => {
+                content.style.transform = 'translateY(0) scale(1)';
+                content.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.3)';
+            });
+        });
+
+        // Add dynamic particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'floating-element';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            particle.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 15000);
+        }
+
+        setInterval(createParticle, 3000);
+    </script>
+</body>
+</html>
