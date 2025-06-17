@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawan Manghnani - Projects 2050</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, #0a0a23 0%, #1a1a2e 25%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #00f0ff, transparent),
+                radial-gradient(2px 2px at 40px 70px, #9f00ff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #00f0ff, transparent),
+                radial-gradient(1px 1px at 130px 80px, #ff0080, transparent),
+                radial-gradient(2px 2px at 160px 30px, #00f0ff, transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: sparkle 20s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-500px) rotate(180deg); opacity: 0.5; }
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, #00f0ff, #9f00ff, #ff0080, #00f0ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .section-subtitle {
+            font-size: 1.4rem;
+            color: #a0a0ff;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .header-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+        }
+        
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding: 1rem;
+        }
+        
+        /* Project Cards */
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(159, 0, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 240, 255, 0.3),
+                0 0 60px rgba(159, 0, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.6);
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-header h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00f0ff;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+        
+        .card-header p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e0e0ff;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        
+        /* Tech Tags */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .tech-tags span {
+            display: inline-block;
+            background: linear-gradient(45deg, rgba(159, 0, 255, 0.3), rgba(0, 240, 255, 0.3));
+            border: 1px solid rgba(159, 0, 255, 0.5);
+            color: #ffffff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .tech-tags span:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(159, 0, 255, 0.6);
+            background: linear-gradient(45deg, rgba(159, 0, 255, 0.5), rgba(0, 240, 255, 0.5));
+        }
+        
+        /* Action Buttons */
+        .card-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .live-btn, .github-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .live-btn {
+            background: linear-gradient(45deg, rgba(0, 240, 255, 0.2), rgba(0, 240, 255, 0.1));
+            color: #00f0ff;
+            border: 2px solid rgba(0, 240, 255, 0.5);
+        }
+        
+        .github-btn {
+            background: linear-gradient(45deg, rgba(159, 0, 255, 0.2), rgba(159, 0, 255, 0.1));
+            color: #9f00ff;
+            border: 2px solid rgba(159, 0, 255, 0.5);
+        }
+        
+        .live-btn::before, .github-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .live-btn:hover, .github-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4);
+        }
+        
+        .live-btn:hover::before, .github-btn:hover::before {
+            left: 100%;
+        }
+        
+        .live-btn:hover {
+            background: linear-gradient(45deg, rgba(0, 240, 255, 0.3), rgba(0, 240, 255, 0.2));
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4), 0 0 20px rgba(0, 240, 255, 0.6);
+        }
+        
+        .github-btn:hover {
+            background: linear-gradient(45deg, rgba(159, 0, 255, 0.3), rgba(159, 0, 255, 0.2));
+            box-shadow: 0 10px 25px rgba(159, 0, 255, 0.4), 0 0 20px rgba(159, 0, 255, 0.6);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .project-card {
+                padding: 1.5rem;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+            
+            .live-btn, .github-btn {
+                justify-content: center;
+            }
+        }
+        
+        /* Loading Animation */
+        .projects-grid {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .project-card {
+            animation: slideInFromBottom 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-section">
+            <div class="header-glow"></div>
+            <h2 class="section-title">🚀 Featured Projects</h2>
+            <p class="section-subtitle">Exploring the frontiers of AI, ML, and futuristic software</p>
+        </div>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>Sifra 🧠</h3>
+                    <p>AI Medical Assistant built using Flask, Python, and Deep Learning. Handles medical reports, intelligent chat interactions, and automated email notifications for healthcare professionals.</p>
+                </div>
+                <div class="tech-tags">
+                    <span>Flask</span>
+                    <span>AI</span>
+                    <span>PDF Parser</span>
+                    <span>LLaMA</span>
+                    <span>Python</span>
+                    <span>Deployed</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://sifra-demo-link.com" target="_blank" class="live-btn">🔗 Live Demo</a>
+                    <a href="https://github.com/pawanmanghnani/sifra" target="_blank" class="github-btn">💻 GitHub</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>AstroVerse 🌟</h3>
+                    <p>Real-time Horoscope AI Web App powered by machine learning algorithms. Provides personalized astrological insights and predictions using advanced data analysis.</p>
+                </div>
+                <div class="tech-tags">
+                    <span>React</span>
+                    <span>AI</span>
+                    <span>ML</span>
+                    <span>API</span>
+                    <span>JavaScript</span>
+                    <span>Real-time</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://astroverse-demo.com" target="_blank" class="live-btn">🔗 Live Demo</a>
+                    <a href="https://github.com/pawanmanghnani/astroverse" target="_blank" class="github-btn">💻 GitHub</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>VisionDetect 👁️</h3>
+                    <p>Cat/Dog Classifier using Convolutional Neural Networks. High-accuracy image recognition system with real-time classification capabilities and user-friendly interface.</p>
+                </div>
+                <div class="tech-tags">
+                    <span>CNN</span>
+                    <span>TensorFlow</span>
+                    <span>Deep Learning</span>
+                    <span>Computer Vision</span>
+                    <span>Python</span>
+                    <span>ML</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://visiondetect-demo.com" target="_blank" class="live-btn">🔗 Live Demo</a>
+                    <a href="https://github.com/pawanmanghnani/visiondetect" target="_blank" class="github-btn">💻 GitHub</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>CodeGuard 🛡️</h3>
+                    <p>Compiler Sandbox with Docker Security. Secure code execution environment with containerized isolation, supporting multiple programming languages and real-time compilation.</p>
+                </div>
+                <div class="tech-tags">
+                    <span>Docker</span>
+                    <span>Security</span>
+                    <span>Compiler</span>
+                    <span>Sandbox</span>
+                    <span>Node.js</span>
+                    <span>DevOps</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://codeguard-demo.com" target="_blank" class="live-btn">🔗 Live Demo</a>
+                    <a href="https://github.com/pawanmanghnani/codeguard" target="_blank" class="github-btn">💻 GitHub</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <h3>ML Portfolio Hub 🤖</h3>
+                    <p>TensorFlow Projects Hub showcasing various machine learning models and experiments. Features neural networks, data visualization, and interactive ML demonstrations.</p>
+                </div>
+                <div class="tech-tags">
+                    <span>TensorFlow</span>
+                    <span>ML</span>
+                    <span>Data Science</span>
+                    <span>Visualization</span>
+                    <span>Portfolio</span>
+                    <span>Interactive</span>
+                </div>
+                <div class="card-actions">
+                    <a href="https://ml-portfolio-demo.com" target="_blank" class="live-btn">🔗 Live Demo</a>
+                    <a href="https://github.com/pawanmanghnani/ml-portfolio" target="_blank" class="github-btn">💻 GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
