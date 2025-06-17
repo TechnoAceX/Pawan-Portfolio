@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Pawan Manghnani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a3e 25%, #2d4a7c 50%, #4169e1 75%, #000000 100%);
+            background-attachment: fixed;
+            color: #ffffff;
+            overflow-x: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(65, 105, 225, 0.3);
+            padding: 1rem 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #4169e1, #00bfff, #1e90ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: #00bfff;
+            background: rgba(65, 105, 225, 0.1);
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+        }
+
+        .nav-links a.active {
+            background: linear-gradient(45deg, #4169e1, #00bfff);
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(65, 105, 225, 0.5);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu span {
+            width: 30px;
+            height: 3px;
+            background: linear-gradient(45deg, #4169e1, #00bfff);
+            margin: 4px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 60px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffffff, #00bfff, #4169e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 30px rgba(65, 105, 225, 0.5); }
+            to { text-shadow: 0 0 50px rgba(0, 191, 255, 0.8); }
+        }
+
+        .page-subtitle {
+            font-size: 1.3rem;
+            color: #b8b8ff;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Bio Section */
+        .bio-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            margin-top: 1rem;
+            border: 2px solid rgba(65, 105, 225, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(65, 105, 225, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .bio-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .bio-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #e0e0ff;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .bio-highlight {
+            background: linear-gradient(45deg, #4169e1, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        /* Roles Section */
+        .roles-section {
+            margin-bottom: 4rem;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .role-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 2px solid rgba(65, 105, 225, 0.2);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(65, 105, 225, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .role-card:hover::before {
+            opacity: 1;
+        }
+
+        .role-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: rgba(0, 191, 255, 0.5);
+            box-shadow: 0 25px 50px rgba(65, 105, 225, 0.3);
+        }
+
+        .role-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #4169e1, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .role-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .role-description {
+            font-size: 1rem;
+            color: #b8b8ff;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Current Role Section */
+        .current-role {
+            background: linear-gradient(135deg, rgba(65, 105, 225, 0.1), rgba(0, 191, 255, 0.05));
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            border: 2px solid rgba(65, 105, 225, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .current-role::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .current-role-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .current-role h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffffff, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .current-role p {
+            font-size: 1.1rem;
+            color: #e0e0ff;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+.company-highlight {
+            background: linear-gradient(45deg, #4169e1, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            margin-bottom: 4rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            border: 2px solid rgba(65, 105, 225, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 191, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(65, 105, 225, 0.2);
+        }
+
+        .skill-category h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00bfff;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, rgba(65, 105, 225, 0.2), rgba(0, 191, 255, 0.1));
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(65, 105, 225, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(45deg, rgba(65, 105, 225, 0.4), rgba(0, 191, 255, 0.2));
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(65, 105, 225, 0.3);
+        }
+
+        /* Personal Section */
+        .personal-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 2px solid rgba(65, 105, 225, 0.2);
+            text-align: center;
+        }
+
+        .personal-section h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffffff, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .personal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .personal-item {
+            padding: 1.5rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(65, 105, 225, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .personal-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .personal-item i {
+            font-size: 2rem;
+            color: #00bfff;
+            margin-bottom: 1rem;
+        }
+
+        .personal-item h4 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .personal-item p {
+            color: #b8b8ff;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-section h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ffffff, #00bfff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #4169e1, #00bfff);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(65, 105, 225, 0.3);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(65, 105, 225, 0.5);
+            background: linear-gradient(45deg, #00bfff, #4169e1);
+        }
+
+        .contact-btn i {
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(15, 15, 35, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 2px solid rgba(65, 105, 225, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer p {
+            color: #b8b8ff;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 0.8rem;
+            border-radius: 50%;
+            background: rgba(65, 105, 225, 0.1);
+            border: 2px solid rgba(65, 105, 225, 0.2);
+        }
+
+        .social-links a:hover {
+            color: #00bfff;
+            background: rgba(0, 191, 255, 0.2);
+            border-color: #00bfff;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .roles-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .role-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .bio-section, .current-role, .personal-section {
+                padding: 2rem;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .bio-section, .current-role, .personal-section {
+                padding: 1.5rem;
+            }
+
+            .role-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .role-icon {
+                font-size: 3rem;
+            }
+
+            .role-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <!-- Add this CSS to your existing styles -->
+<!-- Add this CSS to your existing styles -->
+<style>
+/* Photo Section */
+.photo-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -9;
+    margin-top: 5rem;
+    padding: 10px 0;
+}
+
+.photo-container {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(65, 105, 225, 0.3);
+    box-shadow: 0 0 50px rgba(65, 105, 225, 0.4);
+    transition: all 0.4s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+    border-color: rgba(0, 191, 255, 0.6);
+    box-shadow: 0 0 80px rgba(0, 191, 255, 0.6);
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00bfff;
+    box-shadow: 0 0 30px rgba(65, 105, 225, 0.5);
+    transition: all 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.7);
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .photo-container {
+        width: 250px;
+        height: 250px;
+    }
+}
+</style>
+
+<!-- Add this HTML after your page header and before bio section -->
+<section class="photo-section">
+    <div class="photo-container">
+        <img src="photo.jpg" alt="Pawan Manghnani" class="profile-photo">
+    </div>
+</section>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">PM</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about" class="active">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">About Me</h1>
+                <p class="page-subtitle">Passionate about creating innovative solutions and building meaningful connections through technology</p>
+            </div>
+
+            <!-- Bio Section -->
+            <section class="bio-section">
+                <div class="bio-content">
+                    <p class="bio-text">
+                        Hi there! I'm <span class="bio-highlight">Pawan Manghnani</span>, a dedicated professional with a passion for technology, innovation, and continuous learning. With years of experience in the tech industry, I've had the privilege of working on diverse projects that challenge conventional thinking and push the boundaries of what's possible.
+                    </p>
+                    <p class="bio-text">
+                        My journey has been driven by curiosity and a desire to create meaningful impact through technology. Whether it's developing cutting-edge solutions, mentoring teams, or exploring new frontiers in digital innovation, I believe in the power of collaboration and creative problem-solving.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Current Role -->
+            <section class="current-role">
+                <div class="current-role-content">
+                    <h3>Current Role</h3>
+                    <p>
+                        Currently serving as a <span class="company-highlight">Senior Technology Consultant</span> at <span class="company-highlight">Innovation Labs</span>, where I lead cross-functional teams in developing next-generation solutions. My focus areas include cloud architecture, AI/ML integration, and digital transformation strategies that help organizations achieve their technological goals.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Roles Section -->
+            <section class="roles-section">
+                <div class="roles-grid">
+                    <div class="role-card">
+                        <i class="fas fa-code role-icon"></i>
+                        <h3 class="role-title">Developer</h3>
+                        <p class="role-description">
+                            Crafting clean, efficient code and building scalable applications that solve real-world problems with modern technologies and best practices.
+                        </p>
+                    </div>
+                    <div class="role-card">
+                        <i class="fas fa-users role-icon"></i>
+                        <h3 class="role-title">Team Leader</h3>
+                        <p class="role-description">
+                            Leading and mentoring development teams, fostering collaboration, and ensuring project success through effective communication and strategic planning.
+                        </p>
+                    </div>
+                    <div class="role-card">
+                        <i class="fas fa-lightbulb role-icon"></i>
+                        <h3 class="role-title">Innovator</h3>
+                        <p class="role-description">
+                            Constantly exploring emerging technologies and methodologies to drive innovation and create cutting-edge solutions for complex challenges.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section class="skills-section">
+                <h3 style="text-align: center; font-family: 'Orbitron', monospace; font-size: 2rem; color: #ffffff; margin-bottom: 1rem;">Technical Expertise</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Frontend</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Vue.js</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">TypeScript</span>
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Backend</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">Express</span>
+                            <span class="skill-tag">Django</span>
+                            <span class="skill-tag">Spring Boot</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Cloud & DevOps</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">Terraform</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Database</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">ElasticSearch</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Personal Section -->
+            <section class="personal-section">
+                <h3>Beyond Code</h3>
+                <div class="personal-grid">
+                    <div class="personal-item">
+                        <i class="fas fa-book"></i>
+                        <h4>Continuous Learning</h4>
+                        <p>Always exploring new technologies, frameworks, and industry best practices to stay ahead of the curve.</p>
+                    </div>
+                    <div class="personal-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Community</h4>
+                        <p>Active contributor to open-source projects and tech communities, sharing knowledge and collaborating with peers.</p>
+                    </div>
+                    <div class="personal-item">
+                        <i class="fas fa-mountain"></i>
+                        <h4>Adventure</h4>
+                        <p>When not coding, I enjoy hiking, photography, and exploring new places to fuel creativity and inspiration.</p>
+                    </div>
+                    <div class="personal-item">
+                        <i class="fas fa-music"></i>
+                        <h4>Creativity</h4>
+                        <p>Music and art enthusiast who believes creativity in all forms enhances problem-solving and innovation.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact-section">
+                <h3>Let's Connect</h3>
+                <p style="color: #b8b8ff; margin-bottom: 2rem; font-size: 1.1rem;">
+                    I'm always excited to discuss new opportunities, collaborate on interesting projects, or simply chat about technology and innovation.
+                </p>
+                <div class="contact-buttons">
+                    <a href="mailto:pawan@example.com" class="contact-btn">
+                        <i class="fas fa-envelope"></i>
+                        Email Me
+                    </a>
+                    <a href="https://linkedin.com/in/pawanmanghnani" class="contact-btn">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/pawanmanghnani" class="contact-btn">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Pawan Manghnani. All rights reserved.</p>
+            <p>Built with passion and lots of coffee ☕</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(15, 15, 35, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(15, 15, 35, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
