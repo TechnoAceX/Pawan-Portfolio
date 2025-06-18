@@ -32,7 +32,7 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            animation: fadeOut 2s ease-in-out 3s forwards;
+            animation: fadeOut 0.5s ease-in-out 1s forwards;
         }
 
         .circuit-loader {
@@ -112,7 +112,7 @@
         .container {
             position: relative;
             z-index: 1;
-            animation: slideInUp 1.5s ease-out 3.5s both;
+            animation: slideInUp 1s ease-out 1s both;
         }
 
         @keyframes slideInUp {
@@ -533,7 +533,7 @@
         // Particle System
         function createParticles() {
             const container = document.getElementById('particles');
-            const particleCount = 50;
+            const particleCount = 25;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -610,16 +610,14 @@
 
         // Initialize everything
         window.addEventListener('load', function() {
-            createParticles();
-            createFloatingIcons();
-            updateHUDTime();
-            setInterval(updateHUDTime, 1000);
-            
-            // Add entrance animation delay
-            setTimeout(() => {
-                document.body.style.overflow = 'auto';
-            }, 4000);
-        });
+    createParticles();
+    createFloatingIcons();
+    updateHUDTime();
+    setInterval(updateHUDTime, 1000);
+
+    document.body.style.overflow = 'auto'; // No delay
+});
+
 
         // Add some interactive hover effects
         document.addEventListener('mousemove', function(e) {
