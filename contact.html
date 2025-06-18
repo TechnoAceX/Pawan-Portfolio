@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Interface | Pawan Manghnani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #0d1a2e 25%, #16213e 50%, #0f3460 75%, #1a2040 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #4FC3F7;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            box-shadow: 0 0 10px #4FC3F7;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 1.5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 3.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 4.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) scale(0); }
+            10% { transform: translateY(90vh) scale(1); }
+            90% { transform: translateY(10vh) scale(1); }
+        }
+
+        /* Terminal container */
+        .terminal-container {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Terminal header */
+        .terminal-header {
+            background: rgba(79, 195, 247, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 20px 20px 0 0;
+            padding: 1rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #4FC3F7, #2196F3, #1976D2, #4FC3F7);
+            border-radius: 20px 20px 0 0;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .control-btn {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ff5f57;
+            position: relative;
+        }
+
+        .control-btn:nth-child(2) { background: #ffbd2e; }
+        .control-btn:nth-child(3) { background: #28ca42; }
+
+        .terminal-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4FC3F7;
+            text-shadow: 0 0 20px #4FC3F7;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 20px #4FC3F7, 0 0 30px #4FC3F7; }
+            to { text-shadow: 0 0 30px #4FC3F7, 0 0 40px #4FC3F7; }
+        }
+
+        /* Main terminal content */
+        .terminal-content {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+            padding: 3rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glitch-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #4FC3F7, #2196F3, #1976D2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glitch 2s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-2px); }
+            20% { transform: translateX(2px); }
+            30% { transform: translateX(-1px); }
+            40% { transform: translateX(1px); }
+            50% { transform: translateX(-1px); }
+            60% { transform: translateX(1px); }
+            70% { transform: translateX(-2px); }
+            80% { transform: translateX(2px); }
+            90% { transform: translateX(-1px); }
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Contact grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            text-decoration: none;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(79, 195, 247, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .contact-card:hover::before {
+            animation: scan 1.5s ease-in-out;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(79, 195, 247, 0.3);
+            border-color: #4FC3F7;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .contact-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #4FC3F7;
+        }
+
+        .contact-detail {
+            font-size: 1rem;
+            color: #cccccc;
+            font-weight: 300;
+        }
+
+        /* Status indicator */
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4FC3F7;
+            animation: statusBlink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; box-shadow: 0 0 10px #4FC3F7; }
+            50% { opacity: 0.3; box-shadow: 0 0 20px #4FC3F7; }
+        }
+
+        /* Footer */
+        .terminal-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            font-size: 0.9rem;
+            color: #777;
+            font-family: 'Orbitron', monospace;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .terminal-container {
+                padding: 1rem;
+            }
+
+            .glitch-text {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .contact-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #4FC3F7, #2196F3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+        }
+
+        /* Typing animation styles */
+        .typing-container {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: #4FC3F7;
+            min-height: 2rem;
+        }
+
+        .typing-text {
+            text-shadow: 0 0 10px #4FC3F7;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+            color: #4FC3F7;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <div class="control-btn"></div>
+                <div class="control-btn"></div>
+                <div class="control-btn"></div>
+            </div>
+            <div class="terminal-title">NEURAL INTERFACE v2050.6.18</div>
+        </div>
+
+        <div class="terminal-content">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>CONNECTION ESTABLISHED</span>
+            </div>
+
+            <h1 class="glitch-text">📡 CONTACT PROTOCOL</h1>
+            
+            <p class="subtitle">
+                Initiating communication channels... Ready to collaborate on AI/ML projects, 
+                freelance opportunities, or discuss the future of human-machine interaction.
+            </p>
+
+            <!-- Live typing animation for Let's Connect -->
+            <div class="typing-container">
+                <span class="typing-text" id="letsConnect"></span>
+                <span class="cursor">|</span>
+            </div>
+
+            <div class="contact-grid">
+                <a href="mailto:pawanmanghnani26@gmail.com" class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-label">NEURAL MAIL</div>
+                    <div class="contact-detail">pawanmanghnani26@gmail.com</div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/pawanmanghnani/" class="contact-card" target="_blank">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-label">CORP NETWORK</div>
+                    <div class="contact-detail">@pawanmanghnani</div>
+                </a>
+
+                <a href="https://github.com/pawanmanghnani26" class="contact-card" target="_blank">
+                    <div class="contact-icon">💻</div>
+                    <div class="contact-label">CODE REPOSITORY</div>
+                    <div class="contact-detail">/pawanmanghnani26</div>
+                </a>
+
+                <a href="https://discord.com/users/your-discord-id" class="contact-card" target="_blank">
+                    <div class="contact-icon">💬</div>
+                    <div class="contact-label">VOICE CHANNEL</div>
+                    <div class="contact-detail">@CyberPawan</div>
+                </a>
+
+                <a href="https://twitter.com/pawanmanghnani" class="contact-card" target="_blank">
+                    <div class="contact-icon">🐦</div>
+                    <div class="contact-label">DATA STREAM</div>
+                    <div class="contact-detail">@pawanmanghnani</div>
+                </a>
+
+                <a href="https://instagram.com/pawanmanghnani" class="contact-card" target="_blank">
+                    <div class="contact-icon">📸</div>
+                    <div class="contact-label">VISUAL FEED</div>
+                    <div class="contact-detail">@pawanmanghnani</div>
+                </a>
+            </div>
+
+            <div class="terminal-footer">
+                <p>⚡ SYSTEM POWERED BY QUANTUM PROCESSORS ⚡</p>
+                <p>© 2050 Pawan Manghnani | Neural Interface Division</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive sound effect simulation
+        document.querySelectorAll('.contact-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Simulate terminal beep with visual feedback
+                card.style.boxShadow = '0 0 30px rgba(79, 195, 247, 0.8)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.boxShadow = '';
+            });
+        });
+
+        // Add typing effect to status
+        const statusText = document.querySelector('.status-indicator span');
+        const originalText = statusText.textContent;
+        statusText.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < originalText.length) {
+                statusText.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        };
+        
+        setTimeout(typeWriter, 1000);
+
+        // Add random glitch effect to the title
+        const glitchText = document.querySelector('.glitch-text');
+        setInterval(() => {
+            glitchText.style.textShadow = `
+                ${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #2196F3,
+                ${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #4FC3F7,
+                ${Math.random() * 4 - 2}px ${Math.random() * 4 - 2}px 0 #1976D2
+            `;
+            
+            setTimeout(() => {
+                glitchText.style.textShadow = '';
+            }, 50);
+        }, 3000);
+
+        // Live typing animation for "Let's Connect"
+        const letsConnectElement = document.getElementById('letsConnect');
+        const messages = [
+            "Let's Connect...",
+            "Ready to Collaborate...",
+            "Building the Future Together...",
+            "Neural Networks Active...",
+            "AI Systems Online..."
+        ];
+        
+        let messageIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        
+        function typeMessage() {
+            const currentMessage = messages[messageIndex];
+            
+            if (isDeleting) {
+                letsConnectElement.textContent = currentMessage.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                letsConnectElement.textContent = currentMessage.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            let typingSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && charIndex === currentMessage.length) {
+                typingSpeed = 2000; // Pause at end
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                messageIndex = (messageIndex + 1) % messages.length;
+                typingSpeed = 500; // Pause before next message
+            }
+            
+            setTimeout(typeMessage, typingSpeed);
+        }
+        
+        // Start typing animation after status is done
+        setTimeout(typeMessage, 3000);
+    </script>
+</body>
+</html>
