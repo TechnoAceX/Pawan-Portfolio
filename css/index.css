@@ -103,7 +103,7 @@ body::after {
     opacity: 0.2;
 }
 
-/* Navigation */
+/* Navigation Bar */
 .navbar {
     background: rgba(10, 10, 15, 0.95);
     backdrop-filter: blur(20px);
@@ -116,6 +116,7 @@ body::after {
     transition: all 0.3s ease;
 }
 
+/* Container for Navbar */
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -125,6 +126,7 @@ body::after {
     align-items: center;
 }
 
+/* Logo Styling */
 .logo {
     font-family: 'Orbitron', monospace;
     font-size: 2rem;
@@ -134,13 +136,16 @@ body::after {
     animation: neonPulse 3s infinite;
 }
 
+/* Navigation Links */
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.5rem; /* Reduced gap to avoid overlap on hover */
 }
 
+/* Individual Nav Links */
 .nav-links a {
+    display: inline-block;
     color: var(--text-secondary);
     text-decoration: none;
     font-weight: 600;
@@ -150,8 +155,10 @@ body::after {
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 
+/* Hover Animation Background */
 .nav-links a::before {
     content: '';
     position: absolute;
@@ -161,8 +168,10 @@ body::after {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
     transition: left 0.5s ease;
+    pointer-events: none; /* Prevent interaction with pseudo-element */
 }
 
+/* Hover & Active Effects */
 .nav-links a:hover::before,
 .nav-links a.active::before {
     left: 100%;
@@ -174,7 +183,7 @@ body::after {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glow-sm);
-    transform: translateY(-2px);
+    transform: scale(1.05); /* Safer than translateY */
 }
 
 /* Mobile menu */
