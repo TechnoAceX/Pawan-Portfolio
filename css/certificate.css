@@ -547,67 +547,56 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
+                .mobile-menu {
+                    display: flex;
+                }
 
-            .mobile-menu {
-                display: flex;
-            }
+                .nav-links {
+                    position: fixed;
+                    top: 85px;
+                    right: -100%;
 
-            .container {
-                padding: 100px 15px 30px;
-            }
+                    width: 250px;
+                    height: calc(100vh - 85px);
 
-            .section-title h1 {
-                font-size: 2.5rem;
-            }
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
 
-            .certificates-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
+                    padding-top: 2rem;
+                    gap: 2rem;
 
-            .certificate-card {
-                padding: 20px;
-            }
+                    background: rgba(10, 10, 10, 0.95);
+                    backdrop-filter: blur(25px);
 
-            .certificate-image {
-                height: 180px;
-            }
+                    border-left: 1px solid rgba(0, 191, 255, 0.3);
 
-            .certificate-title {
-                font-size: 1.2rem;
-            }
+                    transition: right 0.4s ease;
 
-            .button-container {
-                flex-direction: column;
-                gap: 10px;
-            }
+                    display: flex;
+                    z-index: 9999;
+                }
 
-            .btn {
-                padding: 14px 20px;
-            }
+                .nav-links.mobile-active {
+                    right: 0;
+                }
 
-            .footer {
-                padding: 30px 0;
-            }
-        }
+                .container {
+                    padding: 100px 15px 30px;
+                }
 
-        @media (max-width: 480px) {
-            .section-title h1 {
-                font-size: 2rem;
-            }
+                .section-title h1 {
+                    font-size: 2.5rem;
+                }
 
-            .certificate-image {
-                height: 150px;
-            }
+                .certificates-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
 
-            .certificate-title {
-                font-size: 1.1rem;
-            }
-        }
-
+                .button-container {
+                    flex-direction: column;
+                }
         /* Scroll animations */
         .certificate-card {
             opacity: 0;
@@ -626,3 +615,4 @@
                 transform: translateY(0);
             }
         }
+    }
